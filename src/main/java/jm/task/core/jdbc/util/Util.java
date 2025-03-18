@@ -18,7 +18,12 @@ public class Util {
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException e) {
+            System.err.println("Ошибка подключения к базе данных: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }
